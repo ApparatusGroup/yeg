@@ -14,6 +14,7 @@ class Settings(BaseSettings):
 
     crawl_rate_limit: float = Field(default=2.0, alias='CRAWL_RATE_LIMIT')
     crawl_max_concurrent: int = Field(default=10, alias='CRAWL_MAX_CONCURRENT')
+    cors_origins: str = Field(default='*', alias='CORS_ORIGINS')
 
 
 @lru_cache
