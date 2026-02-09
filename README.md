@@ -71,3 +71,43 @@ Vercel is not ideal for this backend because this project includes long-running 
 - **401 on preview URL**: your Vercel project likely has deployment protection enabled; this is expected until authenticated.
 - **404 on `/`**: this usually means Vercel built the repo root instead of the `frontend` app. This repo now includes a root `vercel.json` that routes traffic to `frontend` so root deploys work.
 - **404 on `/favicon.ico`**: favicon is now provided at `/favicon.svg` via metadata.
+
+
+## Backend deployment setup
+
+Backend is now ready to deploy as a standalone FastAPI web service.
+
+### Option A: Render (recommended quick start)
+
+This repo includes `render.yaml` configured for the backend service (`rootDir: backend`).
+
+1. Create a new Render Blueprint from this repo.
+2. Set secrets in Render:
+   - `DATABASE_URL`
+   - `REDIS_URL`
+3. Set CORS origins:
+   - `BACKEND_CORS_ORIGINS=https://<your-vercel-domain>`
+4. Deploy and note your API URL.
+5. In Vercel frontend project, set:
+   - `NEXT_PUBLIC_API_URL=https://<your-render-api-domain>`
+
+### Option B: Railway/Fly/other
+
+`backend/Procfile` is included with a production start command:
+
+```bash
+uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-8000}
+```
+
+Use the same environment variables as above.
+
+### Production sanity checks
+
+After deploy, verify:
+
+```bash
+curl https://<api-domain>/
+curl https://<api-domain>/health
+```
+
+Both should return status payloads.

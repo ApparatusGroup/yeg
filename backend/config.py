@@ -12,8 +12,14 @@ class Settings(BaseSettings):
     database_url: str = Field(default='postgresql://user:pass@localhost:5432/yeg_shadow', alias='DATABASE_URL')
     redis_url: str = Field(default='redis://localhost:6379/0', alias='REDIS_URL')
 
+    api_port: int = Field(default=8000, alias='PORT')
+    cors_origins: str = Field(default='http://localhost:3000', alias='BACKEND_CORS_ORIGINS')
+
     crawl_rate_limit: float = Field(default=2.0, alias='CRAWL_RATE_LIMIT')
     crawl_max_concurrent: int = Field(default=10, alias='CRAWL_MAX_CONCURRENT')
+
+    def cors_origin_list(self) -> list[str]:
+        return [origin.strip() for origin in self.cors_origins.split(',') if origin.strip()]
 
 
 @lru_cache
