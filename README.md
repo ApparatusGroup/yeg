@@ -2,31 +2,27 @@
 
 Monorepo scaffold for an Edmonton local-commerce inventory search platform.
 
-## Project layout
+## What's included
 
-- `backend/` FastAPI API, crawler, enrichment, SQL schema, and worker schedule scaffold.
-- `frontend/` Next.js 14 app-router UI scaffold.
-- `docker-compose.yml` local orchestration for API + frontend + Redis.
+- **Backend (FastAPI)** with starter routers (`/search`, `/products`, `/stores`) and schema baseline.
+- **Crawler foundation** with platform fingerprinting and extractor interface.
+- **Enrichment stubs** for vibe classification and embedding hooks.
+- **Frontend (Next.js 14)** with initial landing/search/detail pages and reusable components.
+- **Docker Compose** for local API + frontend + Redis startup.
 
-## Run locally
+## Quick start
 
-## 1) Backend
+### 1) Backend
 
 ```bash
 cd backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn api.main:app --reload
 ```
 
-Health check:
-
-```bash
-curl http://localhost:8000/health
-```
-
-## 2) Frontend
+### 2) Frontend
 
 ```bash
 cd frontend
@@ -34,17 +30,14 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:3000`.
-
-## 3) Full stack with Docker Compose
+### 3) Docker Compose
 
 ```bash
 cp .env.example .env
 docker compose up --build
 ```
 
-## Notes
+## Current status
 
-- The search endpoint is currently scaffolded and returns an empty list until DB + embedding integration is completed.
-- Shopify extraction is implemented as a starter (`/products.json`) while WooCommerce and Square extractors are placeholders.
-- If package installs fail in a restricted network, configure your Python/npm registry access first, then rerun install.
+This commit delivers **Phase 1 foundation + project scaffolding** from the build outline.
+Data persistence, real vector search, and live storefront extraction are intentionally scaffolded and ready for iterative implementation.
