@@ -1,3 +1,10 @@
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
+export async function searchProducts(query: string) {
+  if (!API_URL) {
+    throw new Error('NEXT_PUBLIC_API_URL is not configured')
+  }
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000'
 
 export async function searchProducts(query: string) {
