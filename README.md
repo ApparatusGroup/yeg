@@ -64,3 +64,10 @@ Vercel is not ideal for this backend because this project includes long-running 
 - `/search` is scaffolded and returns empty results until DB + embeddings are wired.
 - Shopify extraction has a starter implementation (`/products.json`), while WooCommerce/Square are placeholders.
 - If installs fail in restricted networks, configure Python/npm registry access and retry.
+
+
+## Vercel troubleshooting
+
+- **401 on preview URL**: your Vercel project likely has deployment protection enabled; this is expected until authenticated.
+- **404 on `/`**: this usually means Vercel built the repo root instead of the `frontend` app. This repo now includes a root `vercel.json` that routes traffic to `frontend` so root deploys work.
+- **404 on `/favicon.ico`**: favicon is now provided at `/favicon.svg` via metadata.

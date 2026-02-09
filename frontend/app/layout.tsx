@@ -5,6 +5,9 @@ import type { ReactNode } from 'react'
 export const metadata: Metadata = {
   title: 'YEG Shadow Inventory',
   description: 'Search local Edmonton inventory in one place.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
