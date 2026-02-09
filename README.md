@@ -24,6 +24,24 @@ Health check:
 
 ```bash
 curl http://localhost:8000/health
+## What's included
+
+- **Backend (FastAPI)** with starter routers (`/search`, `/products`, `/stores`) and schema baseline.
+- **Crawler foundation** with platform fingerprinting and extractor interface.
+- **Enrichment stubs** for vibe classification and embedding hooks.
+- **Frontend (Next.js 14)** with initial landing/search/detail pages and reusable components.
+- **Docker Compose** for local API + frontend + Redis startup.
+
+## Quick start
+
+### 1) Backend
+
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn api.main:app --reload
 ```
 
 ### 2) Frontend
@@ -37,6 +55,7 @@ npm run dev
 Visit `http://localhost:3000`.
 
 ### 3) Full stack with Docker Compose
+### 3) Docker Compose
 
 ```bash
 cp .env.example .env
@@ -64,3 +83,7 @@ Vercel is not ideal for this backend because this project includes long-running 
 - `/search` is scaffolded and returns empty results until DB + embeddings are wired.
 - Shopify extraction has a starter implementation (`/products.json`), while WooCommerce/Square are placeholders.
 - If installs fail in restricted networks, configure Python/npm registry access and retry.
+## Current status
+
+This commit delivers **Phase 1 foundation + project scaffolding** from the build outline.
+Data persistence, real vector search, and live storefront extraction are intentionally scaffolded and ready for iterative implementation.
